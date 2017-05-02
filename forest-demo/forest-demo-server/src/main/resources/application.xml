@@ -12,11 +12,12 @@
 
     <context:property-placeholder location="classpath:/*.properties"/>
 
-
+	<!--
     <forest:registry id="registry" regProtocol="local"  name="registry" address="127.0.0.1:2181"/>
-    <!--<forest:registry id="registry" regProtocol="zookeeper" name="registry" address="127.0.0.1:2181"/>-->
+    -->
+    <forest:registry id="registry" regProtocol="zookeeper" name="registry" address="127.0.0.1:2181"/>
 
-    <forest:server id="forestServer" registry="registry" startHttpServer="true"/>
+    <forest:server id="forestServer" registry="registry" startHttpServer="false"/>
 
     <forest:interceptors>
         <forest:interceptor id="metricInterceptor" class="com.zhizus.forest.support.MetricInterceptor" auto-match="public *(*)"/>

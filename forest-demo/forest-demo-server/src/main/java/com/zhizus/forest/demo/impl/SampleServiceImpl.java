@@ -16,7 +16,7 @@ import javax.ws.rs.Produces;
  * Created by Dempe on 2016/12/7.
  */
 @Path("/sample")
-@ServiceExport
+@ServiceExport(port=9997)
 public class SampleServiceImpl implements SampleService {
 
     /**
@@ -33,6 +33,7 @@ public class SampleServiceImpl implements SampleService {
     @Rate(2)
     @Override
     public String say(@PathParam("str") String str) {
+    	System.out.println("server say " + str);
         return "say " + str;
     }
 
@@ -40,6 +41,7 @@ public class SampleServiceImpl implements SampleService {
     @MethodExport
     @Override
     public String echo(String msg) {
+    	System.out.println("server echo>>> " + msg);
         return "echo>>> " + msg;
     }
 

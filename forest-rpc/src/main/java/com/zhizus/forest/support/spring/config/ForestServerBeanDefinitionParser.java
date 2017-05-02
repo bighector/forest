@@ -2,6 +2,7 @@ package com.zhizus.forest.support.spring.config;
 
 import com.google.common.base.Strings;
 import com.zhizus.forest.common.config.ServerConfig;
+import com.zhizus.forest.common.registry.AbstractServiceDiscovery;
 import com.zhizus.forest.common.util.ForestUtil;
 import com.zhizus.forest.support.MetricInterceptor;
 import com.zhizus.forest.support.spring.ForestServerBean;
@@ -36,6 +37,13 @@ public class ForestServerBeanDefinitionParser implements BeanDefinitionParser {
         builder.addPropertyValue(START_HTTP_SERVER, startHttpSrv);
         builder.addPropertyValue("context", context);
         builder.setInitMethodName("start");
+        
+        String registry = element.getAttribute("registry");
+        if(Strings.isNullOrEmpty(registry)){
+        	builder.addPropertyValue("registry", AbstractServiceDiscovery.DEFAULT_DISCOVERY);
+        }else{
+        	builder.addPropertyReference("registry", registry);
+        }
 
         parserContext.getRegistry().registerBeanDefinition(ForestUtil.getDefaultBeanName(ServerConfig.class),
                 BeanDefinitionBuilder.genericBeanDefinition(ServerConfig.class).getBeanDefinition());

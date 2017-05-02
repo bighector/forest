@@ -40,8 +40,11 @@ public class SampleClient {
     public static void serviceSpringTest() {
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"application-client.xml"});
         SampleService bean = (SampleService) context.getBean("sampleService");
-        String test = bean.say("hello");
-        System.out.println(test);
+        for(int i = 0;i<10;i++){
+	        String test = bean.say("hello");
+	        System.out.println(test);
+        }
+        
     }
 
     public static void benchmarkTest() throws Exception {
